@@ -160,3 +160,113 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# Frontend (React) Ignored Files and Directories
+
+# dependencies
+/traffic-accidents-heatmap/node_modules
+/traffic-accidents-heatmap/.pnp
+/traffic-accidents-heatmap/.pnp.js
+
+# testing
+/traffic-accidents-heatmap/coverage
+
+# production
+/traffic-accidents-heatmap/build
+
+# misc
+/traffic-accidents-heatmap/.DS_Store
+/traffic-accidents-heatmap/.env.local
+/traffic-accidents-heatmap/.env.development.local
+/traffic-accidents-heatmap/.env.test.local
+/traffic-accidents-heatmap/.env.production.local
+
+/traffic-accidents-heatmap/npm-debug.log*
+/traffic-accidents-heatmap/yarn-debug.log*
+/traffic-accidents-heatmap/yarn-error.log*
+
+# Backend (Python) Ignored Files and Directories
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+*.manifest
+*.spec
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# Data files
+/data/
+
+# Model files
+model.pkl
+
+# Logs and local files
+*.log
+*.sqlite3
+
+# Mac OS
+.DS_Store
