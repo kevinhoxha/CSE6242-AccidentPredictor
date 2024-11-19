@@ -1,0 +1,38 @@
+/* src/App.css */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  position: absolute;
+  background-color: white;
+  padding: 10px;
+  margin: 50px;
+  z-index: 1000;
+  width: 200px;
+  font-family: Arial, sans-serif;
+}
+
+.filter-group {
+  margin-bottom: 10px;
+}
+
+.filter-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.filter-group select,
+.filter-group input {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
