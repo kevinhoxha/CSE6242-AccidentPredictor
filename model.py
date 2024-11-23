@@ -1,10 +1,11 @@
 import pandas as pd
+import pickle
 import time
 import plotly.express as px
 from sklearn.model_selection import train_test_split
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import root_mean_squared_error
+from sklearn.metrics import root_mean_squared_error, mean_absolute_error
 
 #df = pd.read_csv('data/crash_data_2022.csv')
 
@@ -52,9 +53,14 @@ y_pred = multi_output_regressor.predict(X_test)
 rmse_lat = root_mean_squared_error(y_test['latitude'], y_pred[:, 0])
 rmse_long = root_mean_squared_error(y_test['longitud'], y_pred[:, 1])
 
+mae_lat = mean_absolute_error(y_test['latitude'], y_pred[:, 0])
+mae_long = mean_absolute_error(y_test['longitud'], y_pred[:, 1])
+
 print(f"RMSE Latitude: {rmse_lat}")
 print(f"RMSE Longitude: {rmse_long}")
 
+print(f"MAE Latitude: {mae_lat}")
+print(f"MAE Longitude: {mae_long}")
 end_time = time.time()
 test_time = end_time - start_time
 
@@ -71,18 +77,20 @@ actual_df['type'] = 'Actual'
 
 combined_df = pd.concat([pred_df, actual_df])
 
-# Plot using plotly
-fig = px.scatter_mapbox(
-    combined_df,
-    lat='latitude',
-    lon='longitud',
-    color='type',
-    zoom=3.5,
-    height=750,
-    width=1400,
-    color_discrete_map={'Predicted': 'red', 'Actual': 'blue'}
-)
+pickle.dump(multi_output_regressor, open('model.pkl', 'wb'))
 
-fig.update_layout(mapbox_style="open-street-map")
-fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-fig.show()
+# # Plot using plotly
+# fig = px.scatter_mapbox(
+#     combined_df,
+#     lat='latitude',
+#     lon='longitud',
+#     color='type',
+#     zoom=3.5,
+#     height=750,
+#     width=1400,
+#     color_discrete_map={'Predicted': 'red', 'Actual': 'blue'}
+# )
+
+# fig.update_layout(mapbox_style="open-street-map")
+# fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+# fig.show()
