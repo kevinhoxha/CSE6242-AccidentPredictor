@@ -9,11 +9,7 @@ Dynamic Map Interaction: Utilizes React Leaflet for an interactive map experienc
 
 ## Running the Application
 ### 1. Backend Setup
-a. Navigate to the Backend Directory
-```
-cd backend
-```
-b. Install Python Dependencies
+a. Install Python Dependencies
 It's recommended to use a virtual environment:
 ```
 python -m venv venv
@@ -30,10 +26,10 @@ If there's no requirements.txt, install the necessary packages:
 pip install flask flask-cors pandas scikit-learn joblib numpy
 ```
 
-c. Prepare the Data
+b. Prepare the Data
 Ensure that all your crash data CSV files (from 2010 to 2022) are placed inside the data/ directory.
 
-d. Train the Model
+c. Train the Model
 If model.pkl is not provided, run model.py to train the model:
 ```
 python model.py
@@ -56,7 +52,7 @@ The server will start and listen on http://localhost:5000.
 a. Navigate to the Frontend Directory
 Open a new terminal window and navigate to the frontend directory:
 ```
-cd frontend/traffic-accidents-heatmap
+cd traffic-accidents-heatmap
 ```
 
 b. Install Node.js Dependencies
