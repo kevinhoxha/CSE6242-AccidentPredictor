@@ -1,13 +1,15 @@
 import pandas as pd
 import pickle
 import time
-import plotly.express as px
 from sklearn.model_selection import train_test_split
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import root_mean_squared_error, mean_absolute_error
+from haversine import haversine
+# import matplotlib.pyplot as plt
+# import plotly.express as px
 
-#df = pd.read_csv('data/crash_data_2022.csv')
+# df = pd.read_csv('data/crash_data_2022.csv')
 
 start_time = time.time()
 
@@ -56,6 +58,17 @@ rmse_long = root_mean_squared_error(y_test['longitud'], y_pred[:, 1])
 mae_lat = mean_absolute_error(y_test['latitude'], y_pred[:, 0])
 mae_long = mean_absolute_error(y_test['longitud'], y_pred[:, 1])
 
+# Calculate haversine distance between each y_pred and y_test point
+haversine_distances = [
+    haversine((y_test.iloc[i]['latitude'], y_test.iloc[i]['longitud']), (y_pred[i, 0], y_pred[i, 1]), unit='mi')
+    for i in range(len(y_test))
+]
+
+# Calculate the Mean Absolute Error (MAE) of the haversine distances
+mae_haversine = sum(haversine_distances) / len(haversine_distances)
+
+print(f"MAE Haversine Distance: {mae_haversine} miles")
+
 print(f"RMSE Latitude: {rmse_lat}")
 print(f"RMSE Longitude: {rmse_long}")
 
@@ -66,20 +79,38 @@ test_time = end_time - start_time
 
 print(f"Test Time: {test_time} seconds")
 
-pred_df = pd.DataFrame({
-    'latitude': y_pred[:, 0],
-    'longitud': y_pred[:, 1],
-    'type': 'Predicted'
-})
-
-actual_df = y_test.copy()
-actual_df['type'] = 'Actual'
-
-combined_df = pd.concat([pred_df, actual_df])
-
 pickle.dump(multi_output_regressor, open('model.pkl', 'wb'))
 
+# # Calculate errors
+# latitude_error = y_test['latitude'] - y_pred[:, 0]
+# longitude_error = y_test['longitud'] - y_pred[:, 1]
+
+# # Filter out very far outliers
+# latitude_error = latitude_error[latitude_error.between(latitude_error.quantile(0.02), latitude_error.quantile(0.98))]
+# longitude_error = longitude_error[longitude_error.between(longitude_error.quantile(0.02), longitude_error.quantile(0.98))]
+
+# # Plot 2D histogram
+# plt.figure(figsize=(10, 6))
+# plt.hist2d(latitude_error, longitude_error, bins=50, cmap='viridis')
+# plt.colorbar(label='Frequency')
+# plt.title('2D Histogram of Latitude and Longitude Errors')
+# plt.xlabel('Latitude Error')
+# plt.ylabel('Longitude Error')
+# plt.show()
+
 # # Plot using plotly
+
+# pred_df = pd.DataFrame({
+#     'latitude': y_pred[:, 0],
+#     'longitud': y_pred[:, 1],
+#     'type': 'Predicted'
+# })
+
+# actual_df = y_test.copy()
+# actual_df['type'] = 'Actual'
+
+# combined_df = pd.concat([pred_df, actual_df])
+
 # fig = px.scatter_mapbox(
 #     combined_df,
 #     lat='latitude',

@@ -15,7 +15,7 @@ function HeatmapLayer({ points }) {
     const heatLayer = L.heatLayer(points, {
       radius: 25,
       blur: 15,
-      maxZoom: 17,
+      maxZoom: 14,
       // You can adjust other options here
     }).addTo(map);
 

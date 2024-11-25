@@ -46,7 +46,7 @@ def get_data():
                 pass  # Ignore invalid filter values
 
     # Limit the number of records to prevent overloading the frontend
-    filtered_df = filtered_df.head(10000)
+    filtered_df = filtered_df.head(40000)
 
     # Convert to JSON
     data = filtered_df[['latitude', 'longitud']].to_dict(orient='records')
